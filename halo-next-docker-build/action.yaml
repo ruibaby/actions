@@ -35,9 +35,7 @@ runs:
     - name: Build with Gradle
       shell: bash
       run: |
-        ./gradlew clean build -x test
-        # we don't need the plain jar when building docker image.
-        rm -rf build/libs/*-plain.jar
+        ./gradlew clean build -x check -x jar
     - name: Docker meta for Halo
       id: meta
       uses: docker/metadata-action@v3
