@@ -43,11 +43,11 @@ runs:
         images: |
           ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}
         tags: |
-          type=schedule,pattern=nightly
-          type=ref,event=branch
+          type=schedule,pattern=nightly-{{date 'YYYYMMDD'}},enabled=${{ github.event_name == 'schedule' }}
+          type=ref,event=branch,enabled=${{ github.event_name == 'push' }}
           type=semver,pattern={{ version }}
           type=semver,pattern={{major}}.{{minor}}
-          type=sha
+          type=sha,enabled=${{ github.event_name == 'push' }}
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
