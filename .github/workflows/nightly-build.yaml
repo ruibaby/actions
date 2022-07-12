@@ -2,7 +2,7 @@ name: Nightly build
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # At 02:30 GMT+8
+    - cron: '*/6 * * * *' # At 02:30 GMT+8
 jobs:
   nightly-build:
     runs-on: ubuntu-latest
