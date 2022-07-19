@@ -14,18 +14,10 @@ inputs:
     description: The basic name of docker.
     required: false
     default: "halo"
-  checkout-from:
-    description: Which ref should be checkouted.
-    required: false
-    default: ${{ github.ref }}
 
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: ${{ inputs.checkout-from }}
-        submodules: true
     - name: Setup JDK 17
       uses: actions/setup-java@v2
       with:
