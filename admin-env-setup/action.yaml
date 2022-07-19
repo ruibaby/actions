@@ -1,0 +1,41 @@
+name: "Admin Environment Setup"
+description: "Admin environment setup, including Node.js setup, pnpm setup and pnpm cache setup"
+
+inputs:
+  node-version:
+    description: Node.js version.
+    required: false
+    default: "16"
+  pnpm-version:
+    description: pnpm version.
+    required: false
+    default: "7"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - uses: pnpm/action-setup@v2.0.1
+      name: Setuop pnpm
+      id: pnpm-install
+      with:
+        version: ${{ inputs.pnpm-version }}
+        run_install: false
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
