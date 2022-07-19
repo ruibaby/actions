@@ -10,3 +10,14 @@
      image-name: halodev # default is halo
      checkout-from: next # default is default branch
    ```
+
+1. Docker build for Halo admin
+
+   ```yaml
+   uses: halo-sigs/actions/admin-next-docker-build-push@main # prefer to specific ref.
+   with:
+     ghcr_token: ${{ secrets.GHCR_TOKEN }} # default is ""
+     push: true # default is false
+     image-name: halodev # default is halo
+     checkout-from: next # default is default branch
+   ```
