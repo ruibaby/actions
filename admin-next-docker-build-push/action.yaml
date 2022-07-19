@@ -13,19 +13,19 @@ inputs:
   image-name:
     description: The basic name of docker.
     required: false
-    default: "halo-admin"
-  checkout-from:
-    description: Which ref should be checkouted.
-    required: false
-    default: ${{ github.ref }}
+    default: "admin"
 
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: ${{ inputs.checkout-from }}
-        submodules: true
+    - name: Environment Set Up
+      uses: halo-sigs/actions/admin-env-setup@main
+    - name: Build Package
+      shell: bash
+      run: |
+        pnpm install
+        pnpm build:packages
+        pnpm build
     - name: Docker meta for Halo admin
       id: meta
       uses: docker/metadata-action@v3
