@@ -42,7 +42,7 @@ runs:
         then
           echo '::set-output name=docker_image::'
         else
-          echo '::set-output name=docker_image::${{ inputs.dockerhub-user }}/${{ inputs.image-name }}'
+          echo '::set-output name=docker_image::halohub/${{ inputs.image-name }}'
         fi
     - name: Docker meta for Halo admin
       id: meta
