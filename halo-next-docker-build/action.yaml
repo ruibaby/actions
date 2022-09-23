@@ -26,6 +26,26 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout Console
+      uses: actions/checkout@v2
+      with:
+        repository: halo-dev/console
+        ref: next
+        path: console
+    - name: Console Environment Set Up
+      uses: halo-sigs/actions/admin-env-setup@main
+    - name: Build Console
+      shell: bash
+      working-directory: console
+      run: |
+        pnpm install
+        pnpm build:packages
+        pnpm build
+    - name: Copy Dist into Halo
+      shell: bash
+      run: |
+        mkdir -p src/main/resources/console
+        cp -r console/dist/* src/main/resources/console
     - name: Setup JDK 17
       uses: actions/setup-java@v2
       with:
