@@ -30,7 +30,7 @@ runs:
       uses: actions/checkout@v2
       with:
         repository: halo-dev/console
-        ref: next
+        ref: main
         path: console
     - name: Console Environment Set Up
       uses: halo-sigs/actions/admin-env-setup@main
