@@ -22,6 +22,10 @@ inputs:
     description: The basic name of docker.
     required: false
     default: "halo"
+  console-ref:
+    description: The Git ref of console project.
+    required: false
+    default: "main"
 
 runs:
   using: "composite"
@@ -30,7 +34,7 @@ runs:
       uses: actions/checkout@v2
       with:
         repository: halo-dev/console
-        ref: main
+        ref: {{ inputs.console-ref }}
         path: console
     - name: Console Environment Set Up
       uses: halo-sigs/actions/admin-env-setup@main

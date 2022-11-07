@@ -10,7 +10,7 @@
      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
      push: true # default is false
      image-name: halodev # default is halo
-     checkout-from: next # default is default branch
+     console-ref: main # The Git ref of console project. Default is main.
    ```
 
 1. Docker build for Halo admin
